@@ -28,7 +28,7 @@ public class Utils {
         return "/utils/utils_index";
     }
     public void ch(){
-
+        System.out.println("aaa");
     }
     @PostMapping ("/utils/catalog_test")
     public String catalogTest(@RequestParam Object sites, Model model) {
