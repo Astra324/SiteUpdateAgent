@@ -1,11 +1,14 @@
 package com.example.client.model;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "catalog")
-public class CatalogItem {
+public class CatalogItem implements SiteData{
     public CatalogItem(){}
     public CatalogItem(TagMap importedMap){
         if(importedMap != null){
@@ -28,30 +31,30 @@ public class CatalogItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO) //AUTO, SEQUENCE, TABLE
     @Column(name = "id")
-    private Long id;
+    @Getter @Setter private Long id;
 
     @Column(name = "signature")
-    private Integer signature;
+    @Getter @Setter private Integer signature;
 
     @Column(name = "href",  length = 800)
-    private String href;
+    @Getter @Setter private String href;
 
     @Column(name = "img_src",  length = 800)
-    private String imgSrc;
+    @Getter @Setter private String imgSrc;
 
     @Column(name = "site_name",  length = 50)
-    private String siteName;
+    @Getter @Setter private String siteName;
 
     @Column(name = "title",  length = 1000)
-    private String title;
+    @Getter @Setter private String title;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "post_date")
-    private Date postDate;
+    @Getter @Setter private Date postDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timestamp")
-    private Date timestamp;
+    @Getter @Setter private Date timestamp;
 
     public String toJson() {
         String format = "{" +
@@ -66,64 +69,7 @@ public class CatalogItem {
         //System.out.println(format);
         return format;
     }
-    public Date getTimestamp() {
-        return timestamp;
-    }
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getSignature() {
-        return signature;
-    }
-
-    public void setSignature(Integer signature) {
-        this.signature = signature;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
-    }
-
-    public String getImgSrc() {
-        return imgSrc;
-    }
-
-    public void setImgSrc(String imgSrc) {
-        this.imgSrc = imgSrc;
-    }
-
-    public String getSiteName() {
-        return siteName;
-    }
-
-    public void setSiteName(String siteName) {
-        this.siteName = siteName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
 
     @Transient
     public Integer creteSignature( TagMap map){
